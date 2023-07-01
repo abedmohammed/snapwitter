@@ -33,7 +33,6 @@ const useFollow = (userId: string) => {
       }
 
       await request();
-
       mutateCurrentUser();
       mutateFetchedUser();
 
