@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
-import { BsSnapchat } from "react-icons/bs";
+import SnapwitterLogo from "../../public/images/Snapwitter_logo.svg";
+import Image from "next/image";
 
 const SidebarLogo = () => {
   const router = useRouter();
@@ -17,13 +18,18 @@ const SidebarLogo = () => {
         flex
         items-center
         justify-center
-        hover:bg-yellow-300
+        hover:bg-yellow-400
         hover:bg-opacity-10
         cursor-pointer
         transition
       "
     >
-      <BsSnapchat size={28} color="white" />
+      <Image
+        src={SnapwitterLogo}
+        height={28}
+        width={28}
+        alt="Snapwitter logo"
+      />
     </div>
   );
 };
