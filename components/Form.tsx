@@ -9,16 +9,24 @@ import axios from "axios";
 import Avatar from "./Avatar";
 import Button from "./Button";
 import usePost from "@/hooks/usePost";
+import { useRouter } from "next/router";
 
 interface FormProps {
   placeholder: string;
   isComment?: boolean;
   postId?: string;
+  goToPost?: boolean;
 }
 
-const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
+const Form: React.FC<FormProps> = ({
+  placeholder,
+  isComment,
+  postId,
+  goToPost,
+}) => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
+  const router = useRouter();
 
   const { data: currentUser } = useCurrentUser();
   const { mutate: mutatePosts } = usePosts();
@@ -33,19 +41,23 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
 
       const url = isComment ? `/api/comments?postId=${postId}` : "/api/posts";
 
-      await axios.post(url, { body });
+      const { data } = await axios.post(url, { body });
 
       toast.success("Tweet created");
 
       setBody("");
       mutatePosts();
       mutatePost();
+
+      if (goToPost) {
+        router.push(`/posts/${data.id}`);
+      }
     } catch (error) {
       toast.error("Something went wrong");
     } finally {
       setIsLoading(false);
     }
-  }, [body, mutatePosts, isComment, postId, mutatePost]);
+  }, [body, mutatePosts, isComment, postId, mutatePost, router, goToPost]);
 
   return (
     <div className="border-b-[1px] border-neutral-800 px-5 py-2">
@@ -95,7 +107,7 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
       ) : (
         <div className="py-8">
           <h1 className="text-white text-2xl text-center mb-4 font-bold">
-            Welcome to Sanpwitter
+            {isComment ? "Join Snapwitter to reply" : "Welcome to Snapwitter"}
           </h1>
           <div className="flex flex-row items-center justify-center gap-4">
             <Button label="Login" onClick={loginModal.onOpen} />
