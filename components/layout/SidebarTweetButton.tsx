@@ -13,12 +13,12 @@ const SidebarTweetButton = () => {
 
   return (
     <div onClick={onClick}>
-      <div className="mt-6 lg:hidden rounded-full h-14 w-14 p-4 flex items-center justify-center bg-yellow-400 hover:bg-opacity-80 transition cursor-pointer">
+      <div className="mt-6 lg:hidden rounded-full h-14 w-14 p-4 flex items-center justify-center bg-[#ffee00] hover:bg-opacity-80 transition cursor-pointer">
         <FaFeather size={24} color="white" />
       </div>
 
-      <div className="mt-6 hidden lg:block px-4 py-2 rounded-full bg-yellow-400 hover:bg-opacity-90 cursor-pointer transition">
-        <p className="text-center font-semibold text-white text-[20px]">
+      <div className="mt-6 hidden lg:block px-4 py-2 rounded-full bg-[#ffee00] hover:bg-opacity-90 cursor-pointer transition">
+        <p className="text-center font-semibold text-black text-[20px]">
           Tweet
         </p>
       </div>
