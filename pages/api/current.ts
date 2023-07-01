@@ -11,6 +11,7 @@ export default async function handler(
   }
 
   try {
+    // make a request to fetch the current user by using the serverauth which checks for the email of the current session
     const { currentUser } = await serverAuth(req, res);
 
     return res.status(200).json(currentUser);

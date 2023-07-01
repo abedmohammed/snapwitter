@@ -1,46 +1,47 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// Prisma schema
 
 generator client {
   provider = "prisma-client-js"
 }
 
+// Database of choice: mongodb
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
+// Setting up user document
 model User {
-  id              String @id @default(auto()) @map("_id") @db.ObjectId
-  name            String?
-  username        String?   @unique
-  bio             String?
-  email           String?   @unique
-  emailVerified   DateTime?
-  image           String?
-  coverImage      String?
-  profileImage    String?
-  hashedPassword  String?
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  followingIds    String[] @db.ObjectId
-  hasNotification Boolean?
+  id              String @id @default(auto()) @map("_id") @db.ObjectId    // id of user
+  name            String?                                                 // name of user
+  username        String?   @unique                                       // username
+  bio             String?                                                 // user bio
+  email           String?   @unique                                       // user email
+  emailVerified   DateTime?                                               // not sure where this is used
+  image           String?                                                 // used for next auth session but large size can break next auth
+  coverImage      String?                                                 // cover image
+  profileImage    String?                                                 // profile image
+  hashedPassword  String?                                                 // encrypted password
+  createdAt       DateTime @default(now())                                // account create date
+  updatedAt       DateTime @updatedAt                                     // account updated date
+  followingIds    String[] @db.ObjectId                                   // list of user ids you are following
+  hasNotification Boolean?                                                // bool to check notifications
 
-  posts         Post[]
-  comments      Comment[]
-  notifications Notification[]
+  posts         Post[]                                                    // has a list of post documents
+  comments      Comment[]                                                 // has a list of comment documents                                               
+  notifications Notification[]                                            // has a list of notification documents
 }
 
 model Post {
-  id                 String @id @default(auto()) @map("_id") @db.ObjectId
-  body               String
+  id                 String @id @default(auto()) @map("_id") @db.ObjectId // id of post
+  body               String                                               // post body content
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
-  userId             String @db.ObjectId
-  likedIds           String[] @db.ObjectId
+  userId             String @db.ObjectId                                  // id of post created
+  likedIds           String[] @db.ObjectId                                // ids of users that liked the post
   image              String?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)  // the post has a relation with the userid that is matchde in the userid fields
 
   comments          Comment[]
 }

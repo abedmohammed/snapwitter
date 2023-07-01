@@ -31,6 +31,14 @@ const Modal: React.FC<ModalProps> = ({
     onClose();
   }, [disabled, onClose]);
 
+  const onOverlayClick = useCallback(
+    (event: any) => {
+      event.stopPropagation();
+      handleClose();
+    },
+    [handleClose]
+  );
+
   const handleSubmit = useCallback(() => {
     if (disabled) {
       return;
@@ -43,8 +51,14 @@ const Modal: React.FC<ModalProps> = ({
 
   return (
     <>
-      <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800 bg-opacity-70">
-        <div className="relative w-full lg:w-3/6 my-6 mx-auto lg:max-w-3xl h-full lg:h-auto">
+      <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none ">
+        {/* OVERLAY */}
+        <div
+          onClick={onOverlayClick}
+          className="cursor-pointer absolute h-full w-full z-40 bg-neutral-800 bg-opacity-70"
+        />
+        {/* MODAL CONTENTS */}
+        <div className="relative w-full lg:w-3/6 z-50 my-6 mx-auto lg:max-w-3xl h-full lg:h-auto">
           <div className="h-full lg:h-auto border-0 rounded-lg relative flex flex-col w-full bg-black outline-none focus:outline-none">
             {/* HEADER */}
             <div className="flex items-center justify-between p-10 rounded-t">

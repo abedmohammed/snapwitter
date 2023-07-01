@@ -12,10 +12,11 @@ export default async function handler(
   }
 
   try {
-    const { email, username, name, password } = req.body;
+    const { email, username, name, password } = req.body; // get values from request body when this endpoint is called
 
-    const hashedPassword = await bcrypt.hash(password, 12);
+    const hashedPassword = await bcrypt.hash(password, 12); // hashing the password
 
+    // create the user in the db
     const user = await prisma.user.create({
       data: {
         email,
@@ -25,6 +26,7 @@ export default async function handler(
       },
     });
 
+    //return the user
     return res.status(200).json(user);
   } catch (error) {
     console.log(error);

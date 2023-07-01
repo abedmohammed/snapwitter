@@ -38,8 +38,11 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
   }, [router, onClick, href, currentUser, auth, loginModal]);
 
   return (
-    <div onClick={handleClick} className="relative flex flex-row items-center">
-      <div className="relative rounded-full h-14 w-14 flex items-center justify-center p-4 hover:bg-slate-300 hover:bg-opacity-10 cursor-pointer lg:hidden">
+    <div
+      onClick={handleClick}
+      className="rounded-full hover:bg-slate-300 hover:bg-opacity-10 cursor-pointer relative flex flex-row items-center"
+    >
+      <div className="relative h-14 w-14 flex items-center justify-center p-4 lg:hidden">
         <Icon size={28} color="white" />
         {alert ? (
           <BsDot
@@ -48,7 +51,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
           />
         ) : null}
       </div>
-      <div className="relative hidden lg:flex items-center gap-4 p-4 rounded-full hover:bg-slate-300 hover:bg-opacity-10 cursor-pointer">
+      <div className="relative hidden lg:flex items-center gap-4 p-4 rounded-full">
         <Icon size={24} color="white" />
       </div>
       <p className="hidden lg:block text-white text-xl">{label}</p>
