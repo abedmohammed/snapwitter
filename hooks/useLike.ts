@@ -7,10 +7,18 @@ import axios from "axios";
 import usePost from "./usePost";
 import usePosts from "./usePosts";
 
-const useLike = ({ postId, userId }: { postId: string; userId?: string }) => {
+const useLike = ({
+  postId,
+  userId,
+  page,
+}: {
+  postId: string;
+  page: number;
+  userId?: string;
+}) => {
   const { data: currentUser } = useCurrentUser();
   const { data: fetchedPost, mutate: mutateFetchedPost } = usePost(postId);
-  const { mutate: mutateFetchedPosts } = usePosts(userId);
+  const { mutate: mutateFetchedPosts } = usePosts(page, userId);
 
   const loginModal = useLoginModal();
 

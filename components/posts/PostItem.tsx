@@ -9,15 +9,16 @@ import useLike from "@/hooks/useLike";
 
 interface PostItemProps {
   data: Record<string, any>;
+  page: number;
   userId?: string;
 }
 
-const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
+const PostItem: React.FC<PostItemProps> = ({ data, userId, page }) => {
   const router = useRouter();
   const loginModal = useLoginModal();
 
   const { data: currentUser } = useCurrentUser();
-  const { hasLiked, toggleLike } = useLike({ postId: data.id, userId });
+  const { hasLiked, toggleLike } = useLike({ postId: data.id, page, userId });
 
   const goToUser = useCallback(
     (event: any) => {
