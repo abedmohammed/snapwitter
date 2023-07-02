@@ -9,7 +9,7 @@ import useLike from "@/hooks/useLike";
 
 interface PostItemProps {
   data: Record<string, any>;
-  page: number;
+  page?: number;
   userId?: string;
 }
 

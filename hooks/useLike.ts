@@ -13,7 +13,7 @@ const useLike = ({
   page,
 }: {
   postId: string;
-  page: number;
+  page?: number;
   userId?: string;
 }) => {
   const { data: currentUser } = useCurrentUser();
