@@ -33,8 +33,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       try {
         const file = files[0];
 
-        if (file.size / 1024 / 1024 > 2) {
-          throw new Error("Image size is too big! Maximum: 2MB.");
+        if (file.size / 1024 / 1024 > 1) {
+          throw new Error("Image size is too big! Maximum: 1MB.");
         }
 
         const reader = new FileReader();
