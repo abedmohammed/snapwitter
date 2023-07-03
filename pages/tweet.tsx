@@ -4,7 +4,7 @@ const tweet = () => {
   return (
     <>
       <div className="mt-2"></div>
-      <Form goToPost placeholder="What's happening?" />
+      <Form placeholder="What's happening?" />
     </>
   );
 };

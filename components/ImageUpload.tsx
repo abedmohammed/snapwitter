@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { toast } from "react-hot-toast";
 
 interface ImageUploadProps {
   onChange: (base64: string) => void;
@@ -26,15 +27,30 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 
   const handleDrop = useCallback(
     (files: any) => {
-      const file = files[0];
-      const reader = new FileReader();
+      try {
+        const file = files[0];
 
-      reader.onload = (event: any) => {
-        setBase64(event.target.result);
-        handleChange(event.target.result);
-      };
+        if (file.size / 1024 / 1024 > 2) {
+          throw new Error("Image size is too big! Maximum: 2MB.");
+        }
 
-      reader.readAsDataURL(file);
+        const reader = new FileReader();
+
+        reader.onload = (event: any) => {
+          setBase64(event.target.result);
+          handleChange(event.target.result);
+        };
+
+        reader.readAsDataURL(file);
+      } catch (error) {
+        if (typeof error === "string") {
+          toast.error(error);
+        } else if (error instanceof Error) {
+          toast.error(error.message);
+        } else {
+          toast.error("Something went wrong!");
+        }
+      }
     },
     [handleChange]
   );

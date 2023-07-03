@@ -15,15 +15,9 @@ interface FormProps {
   placeholder: string;
   isComment?: boolean;
   postId?: string;
-  goToPost?: boolean;
 }
 
-const Form: React.FC<FormProps> = ({
-  placeholder,
-  isComment,
-  postId,
-  goToPost,
-}) => {
+const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const router = useRouter();
@@ -49,7 +43,7 @@ const Form: React.FC<FormProps> = ({
       mutatePosts();
       mutatePost();
 
-      if (goToPost) {
+      if (!isComment) {
         router.push(`/posts/${data.id}`);
       }
     } catch (error) {
@@ -57,7 +51,7 @@ const Form: React.FC<FormProps> = ({
     } finally {
       setIsLoading(false);
     }
-  }, [body, mutatePosts, isComment, postId, mutatePost, router, goToPost]);
+  }, [body, mutatePosts, isComment, postId, mutatePost, router]);
 
   return (
     <div className="border-b-[1px] border-neutral-800 px-5 py-2">
