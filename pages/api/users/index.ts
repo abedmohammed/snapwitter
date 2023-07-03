@@ -11,11 +11,31 @@ export default async function handler(
   }
 
   try {
-    const users = await prisma.user.findMany({
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
+    const { search } = req.query;
+
+    let users;
+
+    if (!search || typeof search !== "string") {
+      users = await prisma.user.findMany({
+        orderBy: {
+          createdAt: "desc",
+        },
+      });
+    } else {
+      users = await prisma.user.findMany({
+        where: {
+          username: {
+            contains: search,
+            mode: "insensitive",
+          },
+        },
+        orderBy: {
+          posts: {
+            _count: "desc",
+          },
+        },
+      });
+    }
 
     return res.status(200).json(users);
   } catch (error) {
