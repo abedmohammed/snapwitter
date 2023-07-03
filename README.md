@@ -20,7 +20,7 @@
 
 <!-- Preview -->
 ## 📷 Preview
-[<img src="https://github.com/abedmohammed/snapwitter/assets/72363970/80b4c44f-a9b6-4f1f-a733-b90fd9dfe6cd" alt="Screenshot to demo the site">](https://www.snapwitter.com/)
+[<img src="https://github.com/abedmohammed/snapwitter/assets/72363970/fa62decd-c260-43d1-bdbc-7cf978b19ed0" alt="Screenshot to demo the site">](https://www.snapwitter.com/)
 
 ### 👩‍💻 Built With
 
@@ -42,7 +42,7 @@ test account: test@test.com | 123456
 
 ### View Posts
 
-<img align="center" src="https://github.com/abedmohammed/snapwitter/assets/72363970/3bab581c-c3ce-4136-9329-ecf519b34e67" alt="Home page of Snapwitter">
+<img align="center" src="https://github.com/abedmohammed/snapwitter/assets/72363970/5d0ae13a-bb4b-4098-8383-95095da737ed" alt="Home page of Snapwitter">
 
 <br />
 
@@ -54,8 +54,7 @@ test account: test@test.com | 123456
 
 ### Connect with Others
 
-<img align="center" src="https://github.com/abedmohammed/snapwitter/assets/72363970/d0a80fbe-328b-421a-9ea2-22db1c1c8db6" alt="Viewing profile page of Ski Guy on Snapwitter">
-
+<img align="center" src="https://github.com/abedmohammed/snapwitter/assets/72363970/ab51bd7b-e58c-4692-86f4-40d7c46c4b38" alt="Viewing profile page of Ski Guy on Snapwitter">
 <br />
 
 <br />
