@@ -6,6 +6,7 @@ import { useCallback, useMemo } from "react";
 import Avatar from "../Avatar";
 import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
 import useLike from "@/hooks/useLike";
+import Image from "next/image";
 
 interface PostItemProps {
   data: Record<string, any>;
@@ -80,6 +81,17 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId, page }) => {
             <span className="text-neutral-500 text-sm">{createdAt}</span>
           </div>
           <div className="text-white mt-1">{data.body}</div>
+          {data?.image && (
+            <div className="mt-4 w-4/5">
+              <Image
+                src={data?.image}
+                width={0}
+                height={0}
+                style={{ width: "100%", height: "auto" }}
+                alt="Post image"
+              />
+            </div>
+          )}
           <div className="flex flex-row items-center mt-3 gap-10">
             <div className="flex flex-row items-center text-neutral-500 gap-2 cursor-pointer transition hover:text-[#ffee00]">
               <AiOutlineMessage size={20} />

@@ -10,6 +10,8 @@ import Avatar from "./Avatar";
 import Button from "./Button";
 import usePost from "@/hooks/usePost";
 import { useRouter } from "next/router";
+import ImageUpload from "./ImageUpload";
+import Image from "next/image";
 
 interface FormProps {
   placeholder: string;
@@ -27,6 +29,7 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
   const { mutate: mutatePost } = usePost(postId as string);
 
   const [body, setBody] = useState("");
+  const [image, setImage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = useCallback(async () => {
@@ -35,7 +38,7 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
 
       const url = isComment ? `/api/comments?postId=${postId}` : "/api/posts";
 
-      const { data } = await axios.post(url, { body });
+      const { data } = await axios.post(url, { body, image });
 
       toast.success("Tweet created");
 
@@ -51,7 +54,7 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
     } finally {
       setIsLoading(false);
     }
-  }, [body, mutatePosts, isComment, postId, mutatePost, router]);
+  }, [body, mutatePosts, isComment, postId, mutatePost, router, image]);
 
   return (
     <div className="border-b-[1px] border-neutral-800 px-5 py-2">
@@ -80,6 +83,17 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
               "
               placeholder={placeholder}
             ></textarea>
+            {image && (
+              <div className="w-4/5">
+                <Image
+                  src={image}
+                  width={0}
+                  height={0}
+                  style={{ width: "100%", height: "auto" }}
+                  alt="Post image"
+                />
+              </div>
+            )}
             <hr
               className="
                 opacity-0 
@@ -89,13 +103,30 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
                 border-neutral-800 
                 transition"
             />
-            <div className="mt-4 flex flex-row justify-end">
-              <Button
-                disabled={isLoading || !body}
-                onClick={onSubmit}
-                label="Tweet"
-              />
-            </div>
+            {!isComment ? (
+              <div className="mt-4 flex flex-row justify-between items-center gap-4">
+                <ImageUpload
+                  value={image}
+                  disabled={isLoading}
+                  onChange={(image) => setImage(image)}
+                  label="image"
+                  icon
+                />
+                <Button
+                  disabled={isLoading || !body}
+                  onClick={onSubmit}
+                  label="Tweet"
+                />
+              </div>
+            ) : (
+              <div className="mt-4 flex flex-row justify-end items-center gap-4">
+                <Button
+                  disabled={isLoading || !body}
+                  onClick={onSubmit}
+                  label="Tweet"
+                />
+              </div>
+            )}
           </div>
         </div>
       ) : (

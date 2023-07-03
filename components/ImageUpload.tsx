@@ -2,12 +2,14 @@ import Image from "next/image";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { toast } from "react-hot-toast";
+import { BiSolidImageAlt } from "react-icons/bi";
 
 interface ImageUploadProps {
   onChange: (base64: string) => void;
   label: string;
   value?: string;
   disabled?: boolean;
+  icon?: boolean;
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({
@@ -15,6 +17,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   label,
   value,
   disabled,
+  icon,
 }) => {
   const [base64, setBase64] = useState(value);
 
@@ -65,6 +68,19 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       "image/webp": [],
     },
   });
+
+  if (icon) {
+    return (
+      <div
+        {...getRootProps({
+          className: "cursor-pointer flex items-end",
+        })}
+      >
+        <input {...getInputProps()} />
+        <BiSolidImageAlt color="white" size={25} className="opacity-60" />;
+      </div>
+    );
+  }
 
   return (
     <div
