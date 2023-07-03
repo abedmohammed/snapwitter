@@ -2,10 +2,17 @@ import useSWR from "swr";
 
 import fetcher from "@/libs/fetcher";
 
-const usePosts = (page?: number, userId?: string) => {
+const usePosts = (
+  page?: number,
+  userId?: string,
+  forUserId?: string,
+  showAll?: boolean
+) => {
   let url;
 
-  if (!page) {
+  if (!showAll && forUserId) {
+    url = `/api/posts?forUserId=${forUserId}&page=${page}`;
+  } else if (!page) {
     url = "/api/posts";
   } else {
     url = userId

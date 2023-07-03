@@ -30,12 +30,37 @@ export default async function handler(
     }
 
     if (req.method === "GET") {
-      const { userId } = req.query;
+      const { userId, forUserId } = req.query;
       const page = Number(req.query.page);
 
       let posts;
       if (!page) {
         posts = await prisma.post.findMany({
+          include: {
+            user: true,
+            comments: true,
+          },
+          orderBy: {
+            createdAt: "desc",
+          },
+        });
+      } else if (forUserId && typeof forUserId === "string") {
+        const user = await prisma.user.findUnique({
+          where: {
+            id: forUserId,
+          },
+          select: {
+            followingIds: true,
+          },
+        });
+        posts = await prisma.post.findMany({
+          take: POSTS_PER_PAGE,
+          skip: (page - 1) * POSTS_PER_PAGE,
+          where: {
+            userId: {
+              in: user?.followingIds,
+            },
+          },
           include: {
             user: true,
             comments: true,

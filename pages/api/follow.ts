@@ -12,7 +12,7 @@ export default async function handler(
   }
 
   try {
-    const { userId } = req.body;
+    const userId = req.method === "POST" ? req.body.userId : req.query.userId;
     const { currentUser } = await serverAuth(req, res);
 
     if (!userId || typeof userId !== "string") {
@@ -29,7 +29,7 @@ export default async function handler(
       throw new Error("invalid ID");
     }
 
-    let updatedFollowingIds = [...(user.followingIds || [])];
+    let updatedFollowingIds = [...(currentUser.followingIds || [])];
 
     if (req.method === "POST") {
       updatedFollowingIds.push(userId);
