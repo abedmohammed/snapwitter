@@ -39,7 +39,6 @@ export default function Document() {
           name="description"
           content="Create an account, follow others, see what everyone is saying, and let others know whats on your mind"
         />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <body>
         <Main />

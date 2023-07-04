@@ -9,7 +9,7 @@ interface PostFeedProps {
 }
 
 const PostFeed: React.FC<PostFeedProps> = ({ userId, forUserId }) => {
-  const [showAll, setShowAll] = useState(forUserId ? false : true);
+  const [showAll, setShowAll] = useState(true);
   const { data: count } = usePostsCount(userId, showAll ? "" : forUserId);
   const [page, setPage] = useState(1);
   const maxPage = Math.ceil(count / POSTS_PER_PAGE);
