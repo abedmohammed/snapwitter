@@ -59,7 +59,7 @@ test account: test@test.com | 123456
 
 <br />
 
-🟡 Customize and edit your own profile's profile picture, cover image, name, and bio!
+🟡 Customize and edit your own profile's profile picture, cover image, name, and bio
 
 🟡 View other people's profiles and see their tweets
 
