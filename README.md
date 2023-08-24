@@ -77,5 +77,5 @@ test account: test@test.com | 123456
 <br />
 
 <div align="center">
-  Mohammed Abed 💠 abedmohammed353@gmail.com 💠 https://github.com/abedmohammed
+  Mohammed Abed 💠 abedm@mcmaster.ca 💠 https://github.com/abedmohammed
 </div>
