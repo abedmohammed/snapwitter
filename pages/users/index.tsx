@@ -1,25 +1,29 @@
 import Avatar from "@/components/Avatar";
-import Button from "@/components/Button";
+import useUsers from "@/hooks/useUsers";
 import Header from "@/components/Header";
 import Input from "@/components/Input";
 import axios from "axios";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
 const Users = () => {
   const [search, setSearch] = useState("");
   const [users, setUsers] = useState<any[]>([]);
 
+  const { data: usersInitial = [] } = useUsers();
+
+  useEffect(() => {
+    setUsers(usersInitial);
+  }, [usersInitial]);
+
   const onSearch = useCallback(async (search: string) => {
-    if (!search) {
-      setUsers([]);
-      return;
-    }
-
     try {
-      const { data: users } = await axios.get(`/api/users?search=${search}`);
-
-      setUsers(users);
+      if (!search) {
+        setUsers(usersInitial);
+      } else {
+        const { data: users } = await axios.get(`/api/users?search=${search}`);
+        setUsers(users);
+      }
     } catch (error) {
       toast.error("Something went wrong");
     }
